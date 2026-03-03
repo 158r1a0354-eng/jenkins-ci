@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
 
     stages {
         stage('Checkout') {
@@ -8,10 +12,9 @@ pipeline {
             }
         }
 
-        stage('Install Node') {
+        stage('Install Dependencies') {
             steps {
-                sh 'sudo apt update'
-                sh 'sudo apt install -y nodejs npm'
+                sh 'npm install'
             }
         }
 
